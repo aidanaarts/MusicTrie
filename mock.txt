@@ -1,0 +1,29 @@
+tiktok,kesha,pop,4
+fire work,katy perry,pop,5
+talk,alan,country,6
+p,k,pop,2
+dynamite,tao cruz,pop,7
+replay,iyaz,pop,3
+toxic,britney spears,pop,5
+sexyback,justin timberlake,pop,5
+womanizer,britney spears,pop,2
+crankthat,soldier boy,hip hop,5
+starships,niki minaj,pop,8
+shots,lmfao,pop,2
+whistle,flo rida,pop,3
+naturally,selena gomez,pop,7
+fireflies,owl city,pop,5
+gasolina,daddy yankee,pop,6
+timber,pitbull,pop,3
+clique,kanye,hiphop,8
+pokerface,lady gaga,pop,3
+firework,katy perry,pop,9
+roar,katy perry,pop,3
+circus,britney spears,pop,5
+blow,kesha,pop,4
+bedrock,young money,pop,4
+stronger,kanye,hiphop,6
+workout,j cole,hiphop,3
+baby,justin beiber,pop,6
+fergalicious,fergie,pop,6
+scream,usher,pop,5
