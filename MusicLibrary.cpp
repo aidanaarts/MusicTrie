@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+#include <queue>
 #include "Playlist.hpp"
 #include "MusicLibrary.hpp"
 
@@ -24,6 +24,18 @@ void MusicLibrary::removeSong(string name,string artist)
   mytrie.deleteSong(temp);
 }
 */
+void MusicLibrary::viewSongInfo(string songName, string artist)
+{
+  songNode *temp = search(songName,artist);
+  cout<<endl<<endl;
+  cout<<"________________________________________"<<endl;
+  cout<<"Song Name: "<<temp->name<<endl;
+  cout<<"Artist Name "<<temp->artist<<endl;
+  cout<<"Genre: "<<temp->genre<<endl;
+  cout<<"priorityNum: "<<temp->priorityNum<<endl;
+  cout<<"________________________________________"<<endl;
+}
+
 void MusicLibrary::shuffle(string playlistName)
 {
   for(int i = 0; i < myplaylists.size();i++)
@@ -76,7 +88,6 @@ void MusicLibrary::insertSong(string name, string artist, string genre, float pr
   newSong->genre = genre;
   newSong->priorityNum = priorityNum;
   //newSong->mysong = mysong;
-
   mytrie.addSong(newSong);
 }
 
@@ -126,14 +137,36 @@ void MusicLibrary::removeFromQueue(songNode* song)
   }
   cout<<"Song not found in Queue"<<endl;
 }
-
+*/
 void MusicLibrary::viewQueue()
 {
   if (myqueue.empty())
-  cout<<"Oh No! Looks like your Queue is Empty!"<<endl;
+  {
+    cout<<"Oh No! Looks like your Queue is Empty!"<<endl;
+    return;
+  }
+  vector<songNode*> temp;
+  int queuesize = myqueue.size();
+  cout<<"QueueSize is: "<<queuesize<<endl;
   for (int i = 0; i < myqueue.size(); i++)
   {
-    cout<<myqueue[i]->name<<" by "<<myqueue[i]->artist<<" Queue Number: "<<i<<endl;
+    temp.push_back(myqueue.front());
+    cout<<temp[i]->name<<" by "<<temp[i]->artist<<endl;
+    myqueue.pop();
+  }
+  for (int j = queuesize; j >= 0; j--)
+  {
+    myqueue.push(temp[j]);
   }
 }
-*/
+
+void MusicLibrary::displayTop5(string myword)
+{
+  mytrie.printTop5(myword);
+}
+
+songNode* MusicLibrary::getTop5(int num)
+{
+  songNode* temp = mytrie.getTop5(num);
+  return temp;
+}
