@@ -12,6 +12,7 @@ using namespace std;
 
 void displaymenu()
 {
+  cout<<endl<<endl;
   cout<<"Welcome to Your Personal Music Library!"<<endl;
   cout<<"---------------------------------------"<<endl;
   cout<<"We Have Already Filled the Library for You What would you like to do?"<<endl;
@@ -20,11 +21,11 @@ void displaymenu()
   cout<<endl;
   cout<<"2. Shuffle, Display, or Play a Playlist"<<endl;
   cout<<endl;
-  cout<<"3. Add to Queue"<<endl;
+  cout<<"3. Add to Queue or view queue"<<endl;
   cout<<endl;
-  //cout<<"4. Search for a Song"<<endl;
+  cout<<"4. View a songs information"<<endl;
   cout<<endl;
-  //cout<<"5. Play Current Queue"<<endl;
+  cout<<"5. Search for song"<<endl;
   cout<<endl;
   cout<<"6. Quit"<<endl;
   cout<<endl;
@@ -69,6 +70,7 @@ int main(int argc, char* argv[])
       MyLibrary.insertSong(songname, songartist, songenre, stof(prionum));
     }
     myfile.close();
+
   }
   else
   {
@@ -137,7 +139,9 @@ int main(int argc, char* argv[])
       else if (choice2 == "2")
       {
         string list;
-        cout << "which playlist would you like to display?" << endl;
+        cout<<"________Which playlist would you like to display?________"<<endl;
+        cout<<"--------Below is a list of your current playlists--------"<<endl;
+        MyLibrary.displayAllPlaylist();
         getline(cin, list);
         bool flag = false;
         MyLibrary.displayPlaylist(list,flag);
@@ -148,11 +152,84 @@ int main(int argc, char* argv[])
     {
       string choicez;
       string choicez2;
+      string choicez3;
+      cout<<"Enter 1 to add to queue"<<endl;
+      cout<<"Enter 2 to view your queue"<<endl;
+      getline(cin,choicez3);
+      if(choicez3 == "1")
+      {
+        cout<<"enter song to add to queue press enter then type in the artist name"<<endl;
+        getline(cin,choicez);
+        getline(cin,choicez2);
+        songNode *temp = MyLibrary.search(choicez,choicez2);
+        MyLibrary.addToQueue(temp);
+      }
+      else if(choicez3 == "2")
+      {
+        MyLibrary.viewQueue();
+      }
+      else
+      {
+        cout<<"Invalid Choice"<<endl;
+      }
+
+    }
+    else if(choice =="4")
+    {
+      string choicez4;
+      string choicez5;
       cout<<"enter song to add to queue press enter then type in the artist name"<<endl;
-      getline(cin,choicez);
-      getline(cin,choicez2);
-      songNode *temp = MyLibrary.search(choicez,choicez2);
-      MyLibrary.addToQueue(temp);
+      getline(cin,choicez4);
+      getline(cin,choicez5);
+      MyLibrary.viewSongInfo(choicez4,choicez5);
+    }
+    else if (choice == "5")
+    {
+      string choice4;
+      string updatingchoice;
+      cout<<"Enter the name of the song you would like to search!"<<endl;
+      getline(cin,choice4);
+      updatingchoice = choice4;
+      MyLibrary.displayTop5(choice4);
+      bool br = true;
+      while(br)
+      {
+        cout<<"If you would like to select an option enter the corresponding number, else keep typing"<<endl;
+        cout<<updatingchoice;
+        if (choice4 == "1" || choice4 == "2" || choice4 == "3" || choice4 == "4" || choice4 == "5")
+        {
+          br = false;
+          break;
+        }
+        getline(cin,choice4);
+        updatingchoice = updatingchoice + choice4;
+        MyLibrary.displayTop5(updatingchoice);
+      }
+      songNode* mysong4 = MyLibrary.getTop5(stoi(choice4));
+      cout<<"What would you like to do with your song?"<<endl;
+      cout<<"1. Add to playlist"<<endl;
+      cout<<"2. Add to queue"<<endl;
+      cout<<"3. Play Song"<<endl;
+      getline(cin,choice4);
+      while(choice4 != "1" && choice4 != "2" && choice4 != "3")
+      {
+        cout<<"Not a valid selection please try again"<<endl;
+        getline(cin,choice4);
+      }
+      if (choice4 == "1")
+      {
+        cout<<"What playlist would you like to add too?"<<endl;
+        MyLibrary.addTooPlaylist(choice4, mysong4->name, mysong4->artist);
+      }
+      else if (choice4 == "2")
+      {
+        cout<<"Adding to Queue"<<endl;
+        MyLibrary.addToQueue(mysong4);
+      }
+      else if (choice4 == "3")
+      {
+        cout<<"Playing "<<mysong4->name<<" by "<<mysong4->artist<<endl;
+      }
     }
   }
 }
