@@ -56,8 +56,13 @@ class Trie
         void printTrie();
         void printTop5(string search);
         node* gethead();
+        void maxchecker(songNode* song);
+        void traversalHelper(node* node);
+        songNode* getTop5(int num);
     private:
         node* head;
+        songNode* top5[5];
+        int numtop5;
 };
 
 #endif
